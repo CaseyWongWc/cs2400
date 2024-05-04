@@ -105,9 +105,10 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
       // Check if the key already exists
       if (hashTable[index] == null || hashTable[index] == AVAILABLE) 
       {
-          hashTable[index] = newEntry;
+         ensureCapacity(); // Ensure enough room for next add 
+         hashTable[index] = newEntry;
           numberOfEntries++;
-          ensureCapacity(); // Ensure enough room for next add
+
           result = newEntry.getValue();
       } else 
       {
@@ -116,7 +117,6 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
           hashTable[index].setValue(value);
           result = oldValue;
       }
-      System.err.println("hi");
       seearray();
 
       return result;
@@ -221,7 +221,7 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
       checkSize(newSize);
       tableSize = newSize;
 
-      seearray();
+      //seearray();
       System.out.println("Resizing " + numberOfEntries + " items. The old size is" + oldSize + " new size is " + tableSize);
 
       // The cast is safe because the new array contains null entries
