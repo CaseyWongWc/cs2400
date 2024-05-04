@@ -1,0 +1,181 @@
+/* 
+package project8binarysearchtree;
+import java.util.Iterator;
+
+import project6tree.BinaryNode;
+import project6tree.BinaryTree;
+import project6tree.BinaryTreeInterface;
+public class BinarySearchTreeI<T extends Comparable<? super T>>  extends BinaryTree<T> implements SearchTreeInterface<T> 
+{
+    public BinarySearchTreeI()
+    {
+       super();
+    } // end default constructor
+    
+    public BinarySearchTreeI(T rootEntry)
+    {
+       super();
+       setRootNode(new BinaryNode<T>(rootEntry));
+    } // end constructor
+    
+    // Disable setTree (see Segment 26.6)
+    public void setTree(T rootData, BinaryTreeInterface<T> leftTree, BinaryTreeInterface<T> rightTree)
+    {
+       throw new UnsupportedOperationException();
+    } // end setTree
+
+    @Override
+    public boolean contains(T anEntry) 
+    {
+        return getEntry(anEntry) != null;
+    }
+
+    @Override
+    public T getEntry(T anEntry) 
+    {
+        return findEntry(getRootNode(), anEntry);
+    }
+
+    private T findEntry(BinaryNode<T> rootNode, T anEntry)
+    {
+        T result = null;
+
+        if ( rootNode != null)
+        {
+            T rootEntry = rootNode.getData();
+
+            if (anEntry.equals(rootEntry))
+            {
+                result = rootEntry;
+            }
+            else if (anEntry.compareTo(rootEntry)<0)
+            {
+                result = findEntry(rootNode.getLeftChild(),anEntry);
+            }
+            else
+            {
+                result = findEntry(rootNode.getRightChild(),anEntry);
+            }
+        }
+        return result;
+    }
+
+
+    public T add(T newEntry)
+    {
+        T result = null;
+        if (isEmpty())
+        {
+            setRootNode(new BinaryNode<T>(newEntry));
+        }
+        else
+        {
+            result = addEntry(newEntry);
+        }
+        return result;
+    }
+
+    private T addEntry(T anEntry) 
+    {
+        BinaryNode<T> currentNode = getRootNode();
+        assert currentNode != null;
+        T result = null;
+        boolean found = false;
+
+        while (!found)
+        {
+            T currentEntry = currentNode.getData();
+            int comparison = anEntry.compareTo(currentEntry);
+            if (comparison == 0)
+            {
+                found = true;
+                result = currentEntry;
+                currentNode.setData(anEntry);
+            }
+            else if (comparison <0)
+            {
+                if (currentNode.hasLeftChild())
+                {
+                    currentNode = currentNode.getLeftChild();
+                }
+                else
+                {
+                    found = true;
+                    currentNode.setLeftChild(new BinaryNode<>(anEntry));
+                }
+            }
+            else
+            {
+                if (currentNode.hasRightChild())
+                {
+                    currentNode = currentNode.getRightChild();
+                }
+                else
+                {
+                    found = true;
+                    currentNode.setRightChild(new BinaryNode<>(anEntry));
+                }
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public T remove(T anEntry) 
+    {
+        return removeEntry(anEntry);
+    }
+
+    private T removeEntry(T anEntry)
+    {
+        BinaryNode<T> rootNode = getRootNode();
+        assert rootNode != null;
+        T entry = null;
+        boolean found = false;
+
+        while (!found)
+        {
+            T currentEntry = rootNode.getData();
+            int comparison = anEntry.compareTo(currentEntry);
+            if (comparison == 0)
+            {
+                found = true;
+                entry = currentEntry;
+                rootNode.setData(null);
+            }
+            else if (comparison <0)
+            {
+                if (rootNode.hasLeftChild())
+                {
+                    rootNode = rootNode.getLeftChild();
+                }
+                else
+                {
+                    found = false;
+                }
+            }
+            else
+            {
+                if (rootNode.hasRightChild())
+                {
+                    rootNode = rootNode.getRightChild();
+                }
+                else
+                {
+                    found = false;
+                }
+            }
+        }
+
+        return entry;
+
+    }
+ 
+ /* Implementations of contains, getEntry, add, and remove are here.
+    . . .
+    Other methods in SearchTreeInterface are inherited from BinaryTree.  */
+ 
+} // end BinarySearchTree
+ 
+*/
