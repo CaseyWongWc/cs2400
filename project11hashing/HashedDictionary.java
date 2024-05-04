@@ -24,7 +24,7 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
 {
    // The dictionary:
 	private int numberOfEntries;
-	private static final int DEFAULT_CAPACITY = 5; // Must be prime
+	private static final int DEFAULT_CAPACITY = 6; // Must be prime
 	private static final int MAX_CAPACITY = 10000;
    
    // The hash table:
@@ -49,7 +49,7 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
       // Set up hash table:
 		// Initial size of hash table is same as initialCapacity if it is prime;
 		// otherwise increase it until it is prime size
-		int tableSize = getNextPrime(initialCapacity);
+		tableSize = getNextPrime(initialCapacity);
       checkSize(tableSize);   // Check that size is not too large
 		
       
@@ -249,11 +249,12 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
 
      private void ensureCapacity() //fix later
     {
-      if (numberOfEntries >= hashTable.length - 1) // If array is full, double its size
+      if (numberOfEntries >= hashTable.length) // If array is full, double its size
       {
-            int newLength = 2 * hashTable.length;
-            checkCapacity(newLength);
-            hashTable = Arrays.copyOf(hashTable, newLength);
+            // int newLength = 2 * hashTable.length;
+            // checkCapacity(newLength);
+            // hashTable = Arrays.copyOf(hashTable, newLength);
+            enlargeHashTable();
       } // end if
     } // end ensureCapacity
 
