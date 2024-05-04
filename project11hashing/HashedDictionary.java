@@ -32,7 +32,7 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
    private int tableSize;                         // Must be prime
    private static final int MAX_SIZE = 2 * MAX_CAPACITY;
    private boolean integrityOK = false;
-	private static final double MAX_LOAD_FACTOR = 0.5; // Fraction of hash table
+	//private static final double MAX_LOAD_FACTOR = 0.5; // Fraction of hash table
                                                       // that can be filled
 	protected final Entry<K, V> AVAILABLE = new Entry<>(null, null);
    
