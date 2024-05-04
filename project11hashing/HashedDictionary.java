@@ -24,7 +24,7 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
 {
    // The dictionary:
 	private int numberOfEntries;
-	private static final int DEFAULT_CAPACITY = 6; // Must be prime
+	private static final int DEFAULT_CAPACITY = 0; // Must be prime
 	private static final int MAX_CAPACITY = 10000;
    
    // The hash table:
@@ -61,7 +61,7 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
       Entry<K, V>[] temp = (Entry<K, V>[])new Entry[tableSize];
       hashTable = temp;
       integrityOK = true;
-      System.out.println("Making an array the size of " + initialCapacity);
+      System.out.println("Making an array the size of " + (initialCapacity+1));
       seearray();
 	} // end constructor
 
