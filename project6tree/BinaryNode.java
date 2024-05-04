@@ -1,5 +1,5 @@
 package project6tree;
-//hi
+
 public class BinaryNode <T>
 {
     private T data;
