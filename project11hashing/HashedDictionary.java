@@ -116,7 +116,7 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
           hashTable[index].setValue(value);
           result = oldValue;
       }
-
+      System.err.println("hi");
       seearray();
 
       return result;
@@ -231,7 +231,7 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
       numberOfEntries = 0;
       // Reset number of dictionary entries, since
       // it will be incremented by add during rehash
-
+      seearray();
       // Rehash dictionary entries from old array to the new and bigger array;
       // skip elements that contain null or AVAILABLE
       for (int index = 0; index < oldSize; index++)
