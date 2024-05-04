@@ -9,7 +9,7 @@ public class DictionaryDemo
     public static void main(String[] args)
     {
         //DictionaryInterface <String, String> addressBook = new LinkedDictionary<>();
-        HashedDictionary <String, String> addressBook = new HashedDictionary<>();
+        HashedDictionary <String, String> addressBook = new HashedDictionary<>(); 
 
         addressBook.add("555-1264", "150 Main Street");
         addressBook.add("555-8132", "75 Center Court");
@@ -21,21 +21,23 @@ public class DictionaryDemo
         addressBook.add("555-2075", "82 Campus Way");
         addressBook.add("555-2076", "82 Campus Way");
 
-
-        System.out.println("Initial phone book entries:");
-        displayAll(addressBook);
+        System.out.println("Initial phone book entries: (order based on key)");
+        displayOrdered(addressBook);
 
         // get a value from key
         getavalue(addressBook,"555-2072");
 
         //removing an entry and print
-        removebykey(addressBook, "555-8132");
-        removebykey(addressBook, "555-4294");
+        addressBook.remove("555-8132");
+        addressBook.remove("555-4294");
 
         //checksif key exists
         checkifkeyexists(addressBook,"555-1264");
         checkifkeyexists(addressBook,"000-0000");
         
+
+        System.out.println("Final phone book entries: (order based on key)");
+        displayOrdered(addressBook);
         // Clear the dictionary
         addressBook.clear();
         System.out.println("\nDictionary cleared");
@@ -43,7 +45,7 @@ public class DictionaryDemo
     }
 
     //helper
-    private static void displayAll(DictionaryInterface<String, String> dictionary) 
+    private static void displayOrdered(DictionaryInterface<String, String> dictionary) 
     {
         Iterator<String> keyIterator = dictionary.getKeyIterator();
         Iterator<String> valueIterator = dictionary.getValueIterator();
@@ -53,12 +55,7 @@ public class DictionaryDemo
         }
     }
     
-    private static void removebykey (DictionaryInterface<String, String> dictionary, String key)
-    {
-        System.out.println("\nRemoving " + key +":");
-        dictionary.remove(key);
-        displayAll(dictionary);
-    }
+
     private static void getavalue (DictionaryInterface<String, String> dictionary, String key)
     {
         String value = dictionary.getValue(key);

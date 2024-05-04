@@ -38,6 +38,7 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
    
 
 
+
    public HashedDictionary()
 	{
 		this(DEFAULT_CAPACITY); // Call next constructor
@@ -60,42 +61,71 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
       Entry<K, V>[] temp = (Entry<K, V>[])new Entry[tableSize];
       hashTable = temp;
       integrityOK = true;
-      
+      System.out.println("Making an array the size of " + initialCapacity);
+      seearray();
 	} // end constructor
 
 /* Implementations of methods in DictionaryInterface are here.
    . . .*/
 
   
+   
+   public void seearray()
+   {
+      System.out.println();
+      for (int i=0; i < hashTable.length; i++)
+      {
+         if (hashTable[i] != null)
+         {
+            System.out.println(i + "\t"+ hashTable[i].toString());
+         }
+         else
+         {
+            System.out.println(i + "\t"+ "null");
+         }
+
+      }
+      System.out.println();
+   }
+
+
    @Override
    public V add(K key, V value) 
    {
+      V result = null;
       checkIntegrity();
       if ((key == null) || (value == null))
           throw new IllegalArgumentException("Cannot add null to this dictionary.");
       int index = getHashIndex(key);
       Entry<K, V> newEntry = new Entry<>(key, value);
-      
+
+      System.out.println("adding "+ value +" to index: " + index + "\tkey: " +key + " " + "hashcode: " + key.hashCode() );
+      System.out.println("Index: " + "hashcode" + " % " + hashTable.length + " = " + index);
+
       // Check if the key already exists
       if (hashTable[index] == null || hashTable[index] == AVAILABLE) 
       {
           hashTable[index] = newEntry;
           numberOfEntries++;
           ensureCapacity(); // Ensure enough room for next add
-          return newEntry.getValue();
+          result = newEntry.getValue();
       } else 
       {
           // Replace existing value
           V oldValue = hashTable[index].getValue();
           hashTable[index].setValue(value);
-          return oldValue;
+          result = oldValue;
       }
 
+      seearray();
+
+      return result;
    }
 
    @Override
    public V remove(K key) 
    {
+      
       checkIntegrity();
       int index = getHashIndex(key);
       if (hashTable[index] == null)
@@ -104,6 +134,10 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
       V removedValue = hashTable[index].getValue();
       hashTable[index] = AVAILABLE; // Do not entirely remove, mark as AVAILABLE for probing
       numberOfEntries--;
+      System.out.println("\nkey: " +key);
+      System.out.println("Index: " + "key" + " % " + hashTable.length + " = " + index);
+      System.out.println("removing "+ removedValue +" from index: " + index );
+      seearray();
       return removedValue;
    }
 
@@ -155,6 +189,7 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
    public void clear() {
       Arrays.fill(hashTable, null);
       numberOfEntries = 0;
+      seearray();
    }
 
 
@@ -165,7 +200,7 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
    private int getHashIndex(K key)
    {
       
-      
+
       int hashIndex = key.hashCode() % hashTable.length;
 
       if (hashIndex < 0)
@@ -173,35 +208,10 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
       hashIndex = probe(hashIndex, key);
 
 
+
       return hashIndex;
    } // end getHashIndex
    
-   // private void enlargeHashTable()
-   // {
-   //    Entry<K,V>[] oldTable = hashTable;
-   //    int oldSize = hashTable.length;
-   //    int newSize = getNextPrime(oldSize+oldSize);
-   //    checkSize(newSize);
-   //    System.out.println("Resizing " + numberOfEntries + " items, new size is " + newSize);
-
-   //    // The cast is safe because the new array contains null entries
-   //    @SuppressWarnings("unchecked")
-   //    Entry<K, V>[] temp = (Entry<K, V>[])new Entry[newSize];
-   //    hashTable = temp;
-   //    numberOfEntries = 0;
-   //    // Reset number of dictionary entries, since
-   //    // it will be incremented by add during rehash
-
-   //    // Rehash dictionary entries from old array to the new and bigger array;
-   //    // skip elements that contain null or AVAILABLE
-   //    for (int index = 0; index < oldSize; index++)
-   //    {
-   //       if ( (oldTable[index] != null) && oldTable[index] != AVAILABLE )
-   //       {
-   //          add(oldTable[index].getKey(), oldTable[index].getValue());
-   //       }
-   //    }// end for
-   // }// end enlargeHashTable
 
    private void enlargeHashTable()
    {
@@ -210,11 +220,13 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
       int newSize = getNextPrime(oldSize+oldSize);
       checkSize(newSize);
       tableSize = newSize;
-      System.out.println("Resizing " + numberOfEntries + " items, new size is " + newSize);
+
+      seearray();
+      System.out.println("Resizing " + numberOfEntries + " items. The old size is" + oldSize + " new size is " + tableSize);
 
       // The cast is safe because the new array contains null entries
       @SuppressWarnings("unchecked")
-      Entry<K, V>[] temp = (Entry<K, V>[])new Entry[newSize];
+      Entry<K, V>[] temp = (Entry<K, V>[])new Entry[tableSize];
       hashTable = temp;
       numberOfEntries = 0;
       // Reset number of dictionary entries, since
@@ -224,15 +236,12 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
       // skip elements that contain null or AVAILABLE
       for (int index = 0; index < oldSize; index++)
       {
-         //K oldkey = oldTable[index].getKey();
-         //V oldvalue = oldTable[index].getValue();
          if ( (oldTable[index] != null) && oldTable[index] != AVAILABLE )
          {
             add(oldTable[index].getKey(), oldTable[index].getValue());
          }
       }// end for
    }// end enlargeHashTable
-
 
 
    private int probe (int index, K key)
@@ -273,7 +282,7 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
    } // end linearProbe
 
 
-   private void checkIntegrity()
+    private void checkIntegrity()
     {
         if (!integrityOK)
             throw new SecurityException("hashTable object is corrupt.");
