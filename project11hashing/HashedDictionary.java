@@ -36,7 +36,9 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
                                                       // that can be filled
 	protected final Entry<K, V> AVAILABLE = new Entry<>(null, null);
    
-	public HashedDictionary()
+
+
+   public HashedDictionary()
 	{
 		this(DEFAULT_CAPACITY); // Call next constructor
 	} // end default constructor
@@ -174,12 +176,40 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
       return hashIndex;
    } // end getHashIndex
    
+   // private void enlargeHashTable()
+   // {
+   //    Entry<K,V>[] oldTable = hashTable;
+   //    int oldSize = hashTable.length;
+   //    int newSize = getNextPrime(oldSize+oldSize);
+   //    checkSize(newSize);
+   //    System.out.println("Resizing " + numberOfEntries + " items, new size is " + newSize);
+
+   //    // The cast is safe because the new array contains null entries
+   //    @SuppressWarnings("unchecked")
+   //    Entry<K, V>[] temp = (Entry<K, V>[])new Entry[newSize];
+   //    hashTable = temp;
+   //    numberOfEntries = 0;
+   //    // Reset number of dictionary entries, since
+   //    // it will be incremented by add during rehash
+
+   //    // Rehash dictionary entries from old array to the new and bigger array;
+   //    // skip elements that contain null or AVAILABLE
+   //    for (int index = 0; index < oldSize; index++)
+   //    {
+   //       if ( (oldTable[index] != null) && oldTable[index] != AVAILABLE )
+   //       {
+   //          add(oldTable[index].getKey(), oldTable[index].getValue());
+   //       }
+   //    }// end for
+   // }// end enlargeHashTable
+
    private void enlargeHashTable()
    {
       Entry<K,V>[] oldTable = hashTable;
       int oldSize = hashTable.length;
       int newSize = getNextPrime(oldSize+oldSize);
       checkSize(newSize);
+      tableSize = newSize;
       System.out.println("Resizing " + numberOfEntries + " items, new size is " + newSize);
 
       // The cast is safe because the new array contains null entries
@@ -194,6 +224,8 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
       // skip elements that contain null or AVAILABLE
       for (int index = 0; index < oldSize; index++)
       {
+         //K oldkey = oldTable[index].getKey();
+         //V oldvalue = oldTable[index].getValue();
          if ( (oldTable[index] != null) && oldTable[index] != AVAILABLE )
          {
             add(oldTable[index].getKey(), oldTable[index].getValue());
@@ -353,23 +385,27 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
    private class ValueIterator implements Iterator<V> 
    {
      private int currentIndex;  // Current position in the hashtable
- 
-     public ValueIterator() {
+     private int numberLeft;   // Number of entries left in iteration
+     public ValueIterator() 
+     {
          currentIndex = 0;
+         numberLeft = numberOfEntries;
      }
  
      @Override
      public boolean hasNext() {
          // Check if the current index is within the number of entries
-         return currentIndex < numberOfEntries;
+         return numberLeft > 0;
      }
  
      @Override
      public V next() {
-         while (currentIndex < hashTable.length) {
+         while (currentIndex < hashTable.length) 
+         {
              if (hashTable[currentIndex] != null && hashTable[currentIndex] != AVAILABLE) {
                  // Access the value at the current index and increment the index
                  V value = hashTable[currentIndex].getValue();
+                 numberLeft--;
                  currentIndex++; // Move to the next entry for the subsequent call
                  return value;
              }
