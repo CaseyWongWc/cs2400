@@ -36,53 +36,22 @@ public class TreeIterator<T> implements TreeIteratorInterface <T>
           return !nodeStack.isEmpty();
        }
  
-      //  public T next() 
-      //  {
-      //     BinaryNode<T> nextNode = null;
- 
-      //     if (currentNode != null && currentNode.getLeftChild() != null)
-      //     {
-      //        nextNode = currentNode;
-      //        nodeStack.push(nextNode);
-      //        currentNode= currentNode.getLeftChild();
- 
-      //     }
-      //     else if ( currentNode != null && currentNode.getRightChild() != null)
-      //     {
-      //        nextNode = (currentNode);
-      //        nodeStack.push(nextNode);
-      //        currentNode= currentNode.getRightChild();
- 
-      //     }
-      //     else if (currentNode != null )
-      //     {
-             
-      //        if (!nodeStack.isEmpty())
-      //        {
-      //           nextNode = currentNode;
-      //           currentNode = nodeStack.pop();
-      //           currentNode = currentNode.getRightChild();
-      //        }
-      //        else
-      //        {
-      //           currentNode = null;
-      //           nodeStack = null;
-      //           return null;
-      //        }
-      //     }
-      //     else
-      //     {
-      //        throw new NoSuchElementException();
-      //     }
-      //     return nextNode.getData();
-      //  }
-       public T next()
+       public T next() 
        {
-         BinaryNode<T> nextNode = null;
-         if (currentNode != null)
-
-
+         currentNode =nodeStack.pop();
+         
+         if (currentNode.hasRightChild())
+         {
+            nodeStack.push(currentNode.getRightChild());
+         }
+         if (currentNode.hasLeftChild())
+         {
+            nodeStack.push(currentNode.getLeftChild());
+         }
+         
+         return currentNode.getData();
        }
+       
     }
     
     @Override

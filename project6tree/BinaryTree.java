@@ -263,6 +263,19 @@ public class BinaryTree<T> implements BinaryTreeInterface<T>
 
       public T next() 
       {
+         currentNode =nodeStack.pop();
+         
+         if (currentNode.hasRightChild())
+         {
+            nodeStack.push(currentNode.getRightChild());
+         }
+         if (currentNode.hasLeftChild())
+         {
+            nodeStack.push(currentNode.getLeftChild());
+         }
+         
+         return currentNode.getData();
+         
          // BinaryNode<T> nextNode = null;
 
          // if (currentNode != null && currentNode.getLeftChild() != null)
@@ -302,18 +315,7 @@ public class BinaryTree<T> implements BinaryTreeInterface<T>
          // return nextNode.getData();
 
          
-         currentNode =nodeStack.pop();
-         
-         if (currentNode.hasRightChild())
-         {
-            nodeStack.push(currentNode.getRightChild());
-         }
-         if (currentNode.hasLeftChild())
-         {
-            nodeStack.push(currentNode.getLeftChild());
-         }
-         
-         return currentNode.getData();
+
       }
       
    }
