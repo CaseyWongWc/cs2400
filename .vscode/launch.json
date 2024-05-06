@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "DirectedGraph",
+            "request": "launch",
+            "mainClass": "DirectedGraph",
+            "projectName": "cs 2400_97fbe4b6"
+        },
+        {
+            "type": "java",
             "name": "DictionaryDemo",
             "request": "launch",
             "mainClass": "project11hashing.DictionaryDemo",

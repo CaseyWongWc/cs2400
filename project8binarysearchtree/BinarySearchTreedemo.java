@@ -63,7 +63,7 @@ public class BinarySearchTreedemo
                 System.out.print(preorder.next()+ " ");
             }
             System.out.println();
-             //bugs
+
 
             Iterator<Integer> post = tree.getPostorderIterator();
             System.out.print("postorderIteration: " );
