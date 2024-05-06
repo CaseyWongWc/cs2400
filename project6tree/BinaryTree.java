@@ -236,66 +236,84 @@ public class BinaryTree<T> implements BinaryTreeInterface<T>
       preorderTraverse(root);
    }
 
+   @Override
    public Iterator<T> getPreorderIterator()
    {
-      return new PreorderIterator();
+      return new PreorderIterator(root);
    }
 
-    private class PreorderIterator implements Iterator<T>
+   private class PreorderIterator implements Iterator<T>
    {
-      private StackInterface<BinaryNode<T>> nodeStack;
+      private StackInterface<BinaryNode<T>> nodeStack = new LinkedStack<>();
       private BinaryNode<T> currentNode;
 
-      public PreorderIterator()
+      public PreorderIterator(BinaryNode<T> root)
       {
-         nodeStack = new LinkedStack<>();
-         currentNode = root;
+        if (root != null)
+        {
+           nodeStack.push(root);
+           currentNode = root;
+        }
       } // end default constructor
 
       public boolean hasNext() 
       {
-         return !nodeStack.isEmpty() || currentNode != null;
+         return !nodeStack.isEmpty();
       }
 
       public T next() 
       {
-         BinaryNode<T> nextNode = null;
+         // BinaryNode<T> nextNode = null;
 
-         if (currentNode != null && currentNode.getLeftChild() != null)
-         {
-            nextNode = currentNode;
-            nodeStack.push(nextNode);
-            currentNode= currentNode.getLeftChild();
+         // if (currentNode != null && currentNode.getLeftChild() != null)
+         // {
+         //    nextNode = currentNode;
+         //    nodeStack.push(nextNode);
+         //    currentNode= currentNode.getLeftChild();
 
-         }
-         else if ( currentNode != null && currentNode.getRightChild() != null)
-         {
-            nextNode = (currentNode);
-            nodeStack.push(nextNode);
-            currentNode= currentNode.getRightChild();
+         // }
+         // else if ( currentNode != null && currentNode.getRightChild() != null)
+         // {
+         //    nextNode = (currentNode);
+         //    nodeStack.push(nextNode);
+         //    currentNode= currentNode.getRightChild();
 
-         }
-         else if (currentNode != null )
-         {
+         // }
+         // else if (currentNode != null )
+         // {
             
-            if (!nodeStack.isEmpty())
-            {
-               nextNode = currentNode;
-               currentNode = nodeStack.pop();
-               currentNode = currentNode.getRightChild();
-            }
-            else
-            {
-               currentNode = null;
-               nodeStack = null;
-               return null;
-            }
-         }
-         else
+         //    if (!nodeStack.isEmpty())
+         //    {
+         //       nextNode = currentNode;
+         //       currentNode = nodeStack.pop();
+         //       currentNode = currentNode.getRightChild();
+         //    }
+         //    else
+         //    {
+         //       currentNode = null;
+         //       nodeStack = null;
+         //       return null;
+         //    }
+         // }
+         // else
+         // {
+         //    throw new NoSuchElementException();
+         // }
+         // return nextNode.getData();
+
+         
+         currentNode =nodeStack.pop();
+         
+         if (currentNode.hasRightChild())
          {
-            throw new NoSuchElementException();
+            nodeStack.push(currentNode.getRightChild());
          }
-         return nextNode.getData();
+         if (currentNode.hasLeftChild())
+         {
+            nodeStack.push(currentNode.getLeftChild());
+         }
+         
+         return currentNode.getData();
       }
       
    }

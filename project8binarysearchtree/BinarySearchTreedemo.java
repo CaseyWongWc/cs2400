@@ -56,13 +56,13 @@ public class BinarySearchTreedemo
             System.out.println();
 
             
-            /*Iterator<Integer> preorder = tree.getPreorderIterator();
+            Iterator<Integer> preorder = tree.getPreorderIterator();
             System.out.print("PreorderIteration: " );
             while (preorder.hasNext())
             {
                 System.out.print(preorder.next()+ " ");
             }
-            System.out.println();*/
+            System.out.println();
              //bugs
 
             Iterator<Integer> post = tree.getPostorderIterator();
