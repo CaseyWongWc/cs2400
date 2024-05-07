@@ -1,15 +1,17 @@
 package project9graphs;
 import java.util.Iterator;
 
-public class Graph<data> implements GraphInterface <data>
+public class Graph<E> implements GraphInterface <E>
 {
     private boolean [] [] edges;
-    private data[] labels;
+    private E[] labels;
+    private int numVertices;
     
     public Graph(int n)
     {
+        numVertices = n;
         edges = new boolean[n][n];
-        labels = (data[]) new Object[n];
+        labels = (E[]) new Object[n];
     }
 
     @Override
@@ -25,7 +27,7 @@ public class Graph<data> implements GraphInterface <data>
     }
 
     @Override
-    public data getLabel(int vertex) 
+    public E getLabel(int vertex) 
     {
         return labels[vertex];
     }
@@ -65,7 +67,7 @@ public class Graph<data> implements GraphInterface <data>
     }
 
     @Override
-    public void setLabel(int vertex, data newLabel) 
+    public void setLabel(int vertex, E newLabel) 
     {
         labels[vertex] = newLabel;
     }
@@ -75,12 +77,32 @@ public class Graph<data> implements GraphInterface <data>
     {   
         return labels.length;
     }
+
+    public void printgraph() 
+    {
+        System.out.print("\t");
+        for (int i = 0; i < numVertices; i++) 
+        {
+            System.out.print(i+"\t");
+        }
+        System.out.println();
+        for (int i = 0; i < numVertices; i++) 
+        {
+        System.out.print(i + "\t");
+        for (int j = 0; j < numVertices; j++) {
+
+            System.out.print(edges[i][j] + "\t");
+        }
+        System.out.println();
+        }
+    }
     
-public static void main(String[] args) 
-{
-    GraphInterface<String> hi = new Graph<>(5);
-    
-}
+    public static void main(String[] args) 
+    {
+        GraphInterface<Integer> hi = new Graph<>(5);
+        hi.addEdge(0, 1);
+        hi.printgraph();
+    }
 }
 
 

@@ -9,5 +9,7 @@ public interface GraphInterface<E> //extends BasicGraphInterface<T>, GraphAlgori
     public void removeEdge(int source, int target);
     public void setLabel(int vertex, E newLabel); 
     public int size();
+    
+    void printgraph();
 
 } 

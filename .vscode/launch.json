@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "adjencymatrix",
+            "request": "launch",
+            "mainClass": "project9graphs.examples.adjencymatrix",
+            "projectName": "cs 2400_97fbe4b6"
+        },
+        {
+            "type": "java",
             "name": "DirectedGraph",
             "request": "launch",
             "mainClass": "DirectedGraph",
