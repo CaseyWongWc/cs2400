@@ -141,9 +141,22 @@ public class matrixgraph<E> implements GraphInterface <E>
         queue.enqueue(origin);
 
         currentvertex = queue.dequeue();
-        visited.enqueue(currentvertex);
-        neighbors2 = currentvertex.
 
+        while (!queue.isEmpty())
+        {
+            visited.enqueue(currentvertex);
+
+            neighbors2 = neighbors(getindex(currentvertex));
+    
+            for (int i=0; i < neighbors2.length;i++)
+            {
+                if(getLabel(neighbors2[i]) != queue.getFront() && getLabel(neighbors2[i]) != visited.getFront())
+                {
+                    queue.enqueue(getLabel(neighbors2[i]));
+                }
+            }
+        }
+        
 
         
 
