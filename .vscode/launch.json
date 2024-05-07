@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "adjGraph",
+            "request": "launch",
+            "mainClass": "project9graphs.adjGraph",
+            "projectName": "cs 2400_97fbe4b6"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "project9graphs.examples.project9graphs.Main",
+            "projectName": "cs 2400_97fbe4b6"
+        },
+        {
+            "type": "java",
             "name": "adjencymatrix",
             "request": "launch",
             "mainClass": "project9graphs.examples.adjencymatrix",

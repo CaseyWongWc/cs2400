@@ -1,12 +1,15 @@
 package project9graphs;
 import java.util.Iterator;
 
-public class Graph<E> implements GraphInterface <E>
+import project3queue.LinkedQueue;
+import project3queue.QueueInterface;
+
+public class matrixgraph<E> implements GraphInterface <E>
 {
     private boolean [] [] edges;
     private E[] labels;
     
-    public Graph(int n)
+    public matrixgraph(int n)
     {
         //labels.length = n;
         edges = new boolean[n][n];
@@ -88,7 +91,64 @@ public class Graph<E> implements GraphInterface <E>
     {   
         return labels.length;
     }
+    
+    private int getindex(E label)
+    {
+        int index=0;
+        for (int i= 0; i < labels.length;i++)
+        {
+            if (labels[i] == label)
+            {
+                index = i;
+            }
+        }
+        
+        return index;
+    }
+    @Override
+    public QueueInterface<E> getBreadthFirstTraversal(E origin)
+    {
+        // //resetVertices();
+        // QueueInterface<E> traversalOrder = new LinkedQueue<>();
+        // QueueInterface<VertexInterface<E>> vertexQueue = new LinkedQueue<>();
+        
+        // VertexInterface<E> originVertex = vertices.getValue(origin);
+        // originVertex.visit();
+        // traversalOrder.enqueue(origin);    // Enqueue vertex label
+        // vertexQueue.enqueue(originVertex); // Enqueue vertex
+        // while (!vertexQueue.isEmpty())
+        //     {
+        //         VertexInterface<E> frontVertex = vertexQueue.dequeue();
+        //         Iterator<VertexInterface<E>> neighbors = frontVertex.getNeighborIterator();
+        //         while (neighbors.hasNext())
+        //         {
+        //             VertexInterface<E> nextNeighbor = neighbors.next();
+        //             if (!nextNeighbor.isVisited())
+        //             {
+        //                 nextNeighbor.visit();
+        //                 traversalOrder.enqueue(nextNeighbor.getLabel());
+        //                 vertexQueue.enqueue(nextNeighbor);
+        //             } // end if
+        //         } // end while
+        //     } // end while
+        // return traversalOrder;
+        
+        QueueInterface<E> visited = new LinkedQueue<>();
+        QueueInterface<E> queue = new LinkedQueue<>();
+        E currentvertex = origin;
+        int[] neighbors2;
+        
+        queue.enqueue(origin);
 
+        currentvertex = queue.dequeue();
+        visited.enqueue(currentvertex);
+        neighbors2 = currentvertex.
+
+
+        
+
+        return visited;
+    } // end getBreadthFirstTraversal
     public void printgraph() 
     {
         System.out.print("\t");
@@ -109,9 +169,14 @@ public class Graph<E> implements GraphInterface <E>
         }
     }
     
+}
+
+class adjGraph
+{
     public static void main(String[] args) 
     {
-        GraphInterface<String> hi = new Graph<>(5);
+        //https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
+        GraphInterface<String> hi = new matrixgraph<>(5);
 
         hi.setLabel(0,"a");
         hi.setLabel(1,"b");
@@ -132,5 +197,3 @@ public class Graph<E> implements GraphInterface <E>
         hi.printgraph();
     }
 }
-
-

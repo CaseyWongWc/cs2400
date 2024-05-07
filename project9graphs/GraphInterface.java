@@ -1,6 +1,6 @@
 package project9graphs;
 
-public interface GraphInterface<E> //extends BasicGraphInterface<T>, GraphAlgorithmsInterface<T>
+public interface GraphInterface<E> extends GraphAlgorithmsInterface<E> //extends BasicGraphInterface<E>, GraphAlgorithmsInterface<E>
 {
     boolean isEdge(int source, int target);
     public boolean addEdge (int source, int target);

@@ -3,12 +3,12 @@ package project9graphs.examples;
 // Adjacency Matrix representation in Java
 //https://www.programiz.com/dsa/graph-adjacency-matrix
 
-public class adjencymatrix {
+public class adjencymatrixex {
     private boolean adjMatrix[][];
     private int numVertices;
   
     // Initialize the matrix
-    public adjencymatrix(int numVertices) {
+    public adjencymatrixex(int numVertices) {
       this.numVertices = numVertices;
       adjMatrix = new boolean[numVertices][numVertices];
     }
@@ -39,7 +39,7 @@ public class adjencymatrix {
     }
   
     public static void main(String args[]) {
-      adjencymatrix g = new adjencymatrix(4);
+      adjencymatrixex g = new adjencymatrixex(4);
   
       g.addEdge(0, 1);
       g.addEdge(0, 2);
