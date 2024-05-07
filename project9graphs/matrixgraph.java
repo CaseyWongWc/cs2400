@@ -140,10 +140,11 @@ public class matrixgraph<E> implements GraphInterface <E>
         
         queue.enqueue(origin);
 
-        currentvertex = queue.dequeue();
 
         while (!queue.isEmpty())
         {
+            currentvertex = queue.dequeue();
+
             visited.enqueue(currentvertex);
 
             neighbors2 = neighbors(getindex(currentvertex));
@@ -157,9 +158,6 @@ public class matrixgraph<E> implements GraphInterface <E>
             }
         }
         
-
-        
-
         return visited;
     } // end getBreadthFirstTraversal
     public void printgraph() 
