@@ -5,7 +5,6 @@ public class Graph<E> implements GraphInterface <E>
 {
     private boolean [] [] edges;
     private E[] labels;
-    //private int labels.length;
     
     public Graph(int n)
     {
@@ -29,7 +28,15 @@ public class Graph<E> implements GraphInterface <E>
     @Override
     public E getLabel(int vertex) 
     {
+        if (labels[vertex] == null)
+        {
+            getLabel2(vertex);
+        }
         return labels[vertex];
+    }
+    private int getLabel2(int vertex) 
+    {
+        return vertex;
     }
 
     @Override
@@ -47,16 +54,20 @@ public class Graph<E> implements GraphInterface <E>
             }
         }
 
+
         answer = new int[count];
         count =0;
-        
+
+        System.out.print("neighbors of " + getLabel(vertex) + ": " );        
         for (i=0; i < labels.length;i++)
         {
             if (edges[vertex][i])
             {
                 answer[count++] =i;
+                System.out.print(getLabel(i) + ",");
             }
         }
+        System.out.println();
         return answer;
     }
 
@@ -83,20 +94,12 @@ public class Graph<E> implements GraphInterface <E>
         System.out.print("\t");
         for (int i = 0; i < labels.length; i++) 
         {
-            if (labels[i] == null)
-            {System.out.print(i+"\t");}
-                else
-            {System.out.print(this.getLabel(i)+"\t");}
+            System.out.print(getLabel(i)+"\t");
         }
         System.out.println();
         for (int i = 0; i < labels.length; i++) 
         {
-            
-        if (labels[i] == null)
-        {System.out.print(i+"\t");}
-            else
-        {System.out.print(this.getLabel(i)+"\t");}
-
+            System.out.print(getLabel(i)+"\t");
         for (int j = 0; j < labels.length; j++) 
         {
 
@@ -114,9 +117,18 @@ public class Graph<E> implements GraphInterface <E>
         hi.setLabel(1,"b");
         hi.setLabel(2,"c");
         hi.setLabel(3,"d");
-        hi.setLabel(3,"e");
+        hi.setLabel(4,"e");
 
         hi.addEdge(0, 1);
+        hi.addEdge(0, 3);
+        hi.addEdge(1, 0);
+        hi.addEdge(2, 2);
+        hi.addEdge(3, 0);
+        hi.addEdge(3, 1);
+        hi.addEdge(3, 2);
+        hi.addEdge(4, 3);
+
+        hi.neighbors(3);
         hi.printgraph();
     }
 }
