@@ -5,11 +5,11 @@ public class Graph<E> implements GraphInterface <E>
 {
     private boolean [] [] edges;
     private E[] labels;
-    private int numVertices;
+    //private int labels.length;
     
     public Graph(int n)
     {
-        numVertices = n;
+        //labels.length = n;
         edges = new boolean[n][n];
         labels = (E[]) new Object[n];
     }
@@ -81,15 +81,24 @@ public class Graph<E> implements GraphInterface <E>
     public void printgraph() 
     {
         System.out.print("\t");
-        for (int i = 0; i < numVertices; i++) 
+        for (int i = 0; i < labels.length; i++) 
         {
-            System.out.print(i+"\t");
+            if (labels[i] == null)
+            {System.out.print(i+"\t");}
+                else
+            {System.out.print(this.getLabel(i)+"\t");}
         }
         System.out.println();
-        for (int i = 0; i < numVertices; i++) 
+        for (int i = 0; i < labels.length; i++) 
         {
-        System.out.print(i + "\t");
-        for (int j = 0; j < numVertices; j++) {
+            
+        if (labels[i] == null)
+        {System.out.print(i+"\t");}
+            else
+        {System.out.print(this.getLabel(i)+"\t");}
+
+        for (int j = 0; j < labels.length; j++) 
+        {
 
             System.out.print(edges[i][j] + "\t");
         }
@@ -99,7 +108,14 @@ public class Graph<E> implements GraphInterface <E>
     
     public static void main(String[] args) 
     {
-        GraphInterface<Integer> hi = new Graph<>(5);
+        GraphInterface<String> hi = new Graph<>(5);
+
+        hi.setLabel(0,"a");
+        hi.setLabel(1,"b");
+        hi.setLabel(2,"c");
+        hi.setLabel(3,"d");
+        hi.setLabel(3,"e");
+
         hi.addEdge(0, 1);
         hi.printgraph();
     }
