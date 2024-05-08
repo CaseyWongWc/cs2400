@@ -109,65 +109,7 @@ public class matrixgraph<E> implements GraphInterface <E>
         return index;
     }
     @Override
-    // public QueueInterface<E> getBreadthFirstTraversal(E origin)
-    // {
-    //     // resetVertices();
-    //     // QueueInterface<E> traversalOrder = new LinkedQueue<>();
-    //     // QueueInterface<VertexInterface<E>> vertexQueue = new LinkedQueue<>();
-        
-    //     // VertexInterface<E> originVertex = vertices.getValue(origin);
-    //     // originVertex.visit();
-    //     // traversalOrder.enqueue(origin);    // Enqueue vertex label
-    //     // vertexQueue.enqueue(originVertex); // Enqueue vertex
-    //     // while (!vertexQueue.isEmpty())
-    //     //     {
-    //     //         VertexInterface<E> frontVertex = vertexQueue.dequeue();
-    //     //         Iterator<VertexInterface<E>> neighbors = frontVertex.getNeighborIterator();
-    //     //         while (neighbors.hasNext())
-    //     //         {
-    //     //             VertexInterface<E> nextNeighbor = neighbors.next();
-    //     //             if (!nextNeighbor.isVisited())
-    //     //             {
-    //     //                 nextNeighbor.visit();
-    //     //                 traversalOrder.enqueue(nextNeighbor.getLabel());
-    //     //                 vertexQueue.enqueue(nextNeighbor);
-    //     //             } // end if
-    //     //         } // end while
-    //     //     } // end while
-    //     // return traversalOrder;
-    //     //============================================================
-    //     // QueueInterface<E> visited = new LinkedQueue<>();
-    //     // QueueInterface<E> queue = new LinkedQueue<>();
-    //     // E currentvertex = origin;
-    //     // int[] neighbors2;
-        
-    //     // queue.enqueue(currentvertex);
-
-
-    //     // while (!queue.isEmpty())
-    //     // {
-
-    //     //     currentvertex = queue.dequeue();
-
-    //     //     visited.enqueue(currentvertex);
-
-    //     //     neighbors2 = neighbors(getindex(currentvertex));
-    
-    //     //     for (int i=0; i < neighbors2.length;i++)
-    //     //     {
-    //     //         QueueInterface<E> tempvisited = visited;
-
-    //     //         while (!tempvisited.isEmpty())
-    //     //         {
-    //     //             if (neighbors2[i] != getindex(tempvisited.dequeue()))
-    //     //             {
-    //     //                 queue.enqueue(getLabel(neighbors2[i]));
-    //     //             }
-    //     //         }
-    //     //     } 
-    //     // }
-    //     // return visited;
-    // } // end getBreadthFirstTraversal
+   
 
     public QueueInterface<E> getBreadthFirstTraversal(E origin) 
     {
@@ -225,6 +167,12 @@ public class matrixgraph<E> implements GraphInterface <E>
         }
         System.out.println();
         }
+    }
+
+    @Override
+    public QueueInterface<E> getDepthFirstTraversal(E origin) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getDepthFirstTraversal'");
     }
     
 }
