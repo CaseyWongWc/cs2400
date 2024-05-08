@@ -143,6 +143,7 @@ public class matrixgraph<E> implements GraphInterface <E>
 
         while (!queue.isEmpty())
         {
+
             currentvertex = queue.dequeue();
 
             visited.enqueue(currentvertex);
@@ -151,15 +152,27 @@ public class matrixgraph<E> implements GraphInterface <E>
     
             for (int i=0; i < neighbors2.length;i++)
             {
-                if(getLabel(neighbors2[i]) != queue.getFront() && getLabel(neighbors2[i]) != visited.getFront())
+                QueueInterface<E> tempvisited = visited;
+                QueueInterface<E> tempqueue = queue;
+                QueueInterface<E> combined = new LinkedQueue<>();
+
+                while (!tempvisited.isEmpty())
                 {
-                    queue.enqueue(getLabel(neighbors2[i]));
+                    
                 }
-            }
+                while (!tempqueue.isEmpty())
+                {
+
+                }
+            } //////////////////////////////////////FIXTHEBUGS HERE
+            // if(getLabel(neighbors2[i]) != queue.getFront() || getLabel(neighbors2[i]) != visited.getFront())
+            // {
+            //     queue.enqueue(getLabel(neighbors2[i]));
+            // }
         }
-        
         return visited;
     } // end getBreadthFirstTraversal
+
     public void printgraph() 
     {
         System.out.print("\t");
@@ -206,5 +219,6 @@ class adjGraph
 
         hi.neighbors(3);
         hi.printgraph();
+        hi.getBreadthFirstTraversal("a");
     }
 }
