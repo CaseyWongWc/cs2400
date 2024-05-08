@@ -108,69 +108,62 @@ public class matrixgraph<E> implements GraphInterface <E>
     @Override
     public QueueInterface<E> getBreadthFirstTraversal(E origin)
     {
-        // //resetVertices();
-        // QueueInterface<E> traversalOrder = new LinkedQueue<>();
-        // QueueInterface<VertexInterface<E>> vertexQueue = new LinkedQueue<>();
+        resetVertices();
+        QueueInterface<E> traversalOrder = new LinkedQueue<>();
+        QueueInterface<VertexInterface<E>> vertexQueue = new LinkedQueue<>();
         
-        // VertexInterface<E> originVertex = vertices.getValue(origin);
-        // originVertex.visit();
-        // traversalOrder.enqueue(origin);    // Enqueue vertex label
-        // vertexQueue.enqueue(originVertex); // Enqueue vertex
-        // while (!vertexQueue.isEmpty())
-        //     {
-        //         VertexInterface<E> frontVertex = vertexQueue.dequeue();
-        //         Iterator<VertexInterface<E>> neighbors = frontVertex.getNeighborIterator();
-        //         while (neighbors.hasNext())
-        //         {
-        //             VertexInterface<E> nextNeighbor = neighbors.next();
-        //             if (!nextNeighbor.isVisited())
-        //             {
-        //                 nextNeighbor.visit();
-        //                 traversalOrder.enqueue(nextNeighbor.getLabel());
-        //                 vertexQueue.enqueue(nextNeighbor);
-        //             } // end if
-        //         } // end while
-        //     } // end while
-        // return traversalOrder;
-        
-        QueueInterface<E> visited = new LinkedQueue<>();
-        QueueInterface<E> queue = new LinkedQueue<>();
-        E currentvertex = origin;
-        int[] neighbors2;
-        
-        queue.enqueue(origin);
-
-
-        while (!queue.isEmpty())
-        {
-
-            currentvertex = queue.dequeue();
-
-            visited.enqueue(currentvertex);
-
-            neighbors2 = neighbors(getindex(currentvertex));
-    
-            for (int i=0; i < neighbors2.length;i++)
+        VertexInterface<E> originVertex = vertices.getValue(origin);
+        originVertex.visit();
+        traversalOrder.enqueue(origin);    // Enqueue vertex label
+        vertexQueue.enqueue(originVertex); // Enqueue vertex
+        while (!vertexQueue.isEmpty())
             {
-                QueueInterface<E> tempvisited = visited;
-                QueueInterface<E> tempqueue = queue;
-                QueueInterface<E> combined = new LinkedQueue<>();
-
-                while (!tempvisited.isEmpty())
+                VertexInterface<E> frontVertex = vertexQueue.dequeue();
+                Iterator<VertexInterface<E>> neighbors = frontVertex.getNeighborIterator();
+                while (neighbors.hasNext())
                 {
-                    
-                }
-                while (!tempqueue.isEmpty())
-                {
+                    VertexInterface<E> nextNeighbor = neighbors.next();
+                    if (!nextNeighbor.isVisited())
+                    {
+                        nextNeighbor.visit();
+                        traversalOrder.enqueue(nextNeighbor.getLabel());
+                        vertexQueue.enqueue(nextNeighbor);
+                    } // end if
+                } // end while
+            } // end while
+        return traversalOrder;
+        
+        // QueueInterface<E> visited = new LinkedQueue<>();
+        // QueueInterface<E> queue = new LinkedQueue<>();
+        // E currentvertex = origin;
+        // int[] neighbors2;
+        
+        // queue.enqueue(currentvertex);
 
-                }
-            } //////////////////////////////////////FIXTHEBUGS HERE
-            // if(getLabel(neighbors2[i]) != queue.getFront() || getLabel(neighbors2[i]) != visited.getFront())
-            // {
-            //     queue.enqueue(getLabel(neighbors2[i]));
-            // }
-        }
-        return visited;
+
+        // while (!queue.isEmpty())
+        // {
+
+        //     currentvertex = queue.dequeue();
+
+        //     visited.enqueue(currentvertex);
+
+        //     neighbors2 = neighbors(getindex(currentvertex));
+    
+        //     for (int i=0; i < neighbors2.length;i++)
+        //     {
+        //         QueueInterface<E> tempvisited = visited;
+
+        //         while (!tempvisited.isEmpty())
+        //         {
+        //             if (neighbors2[i] != getindex(tempvisited.dequeue()))
+        //             {
+        //                 queue.enqueue(getLabel(neighbors2[i]));
+        //             }
+        //         }
+        //     } 
+        // }
+        // return visited;
     } // end getBreadthFirstTraversal
 
     public void printgraph() 
@@ -202,23 +195,27 @@ class adjGraph
         //https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
         GraphInterface<String> hi = new matrixgraph<>(5);
 
-        hi.setLabel(0,"a");
-        hi.setLabel(1,"b");
-        hi.setLabel(2,"c");
-        hi.setLabel(3,"d");
-        hi.setLabel(4,"e");
+        hi.setLabel(0,"0");
+        hi.setLabel(1,"1");
+        hi.setLabel(2,"2");
+        hi.setLabel(3,"3");
+        hi.setLabel(4,"4");
 
         hi.addEdge(0, 1);
-        hi.addEdge(0, 3);
+        hi.addEdge(0, 2);
         hi.addEdge(1, 0);
-        hi.addEdge(2, 2);
-        hi.addEdge(3, 0);
+        hi.addEdge(1, 2);
+        hi.addEdge(1, 3);
+        hi.addEdge(2, 0);
+        hi.addEdge(2, 1);
+        hi.addEdge(2, 4);
         hi.addEdge(3, 1);
-        hi.addEdge(3, 2);
+        hi.addEdge(3, 4);
+        hi.addEdge(4, 2);
         hi.addEdge(4, 3);
 
         hi.neighbors(3);
         hi.printgraph();
-        hi.getBreadthFirstTraversal("a");
+        hi.getBreadthFirstTraversal("0");
     }
 }
