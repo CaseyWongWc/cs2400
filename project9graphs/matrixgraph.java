@@ -1,5 +1,7 @@
 package project9graphs;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import project3queue.LinkedQueue;
 import project3queue.QueueInterface;
@@ -106,66 +108,99 @@ public class matrixgraph<E> implements GraphInterface <E>
         return index;
     }
     @Override
-    public QueueInterface<E> getBreadthFirstTraversal(E origin)
-    {
-        resetVertices();
-        QueueInterface<E> traversalOrder = new LinkedQueue<>();
-        QueueInterface<VertexInterface<E>> vertexQueue = new LinkedQueue<>();
+    // public QueueInterface<E> getBreadthFirstTraversal(E origin)
+    // {
+    //     // resetVertices();
+    //     // QueueInterface<E> traversalOrder = new LinkedQueue<>();
+    //     // QueueInterface<VertexInterface<E>> vertexQueue = new LinkedQueue<>();
         
-        VertexInterface<E> originVertex = vertices.getValue(origin);
-        originVertex.visit();
-        traversalOrder.enqueue(origin);    // Enqueue vertex label
-        vertexQueue.enqueue(originVertex); // Enqueue vertex
-        while (!vertexQueue.isEmpty())
-            {
-                VertexInterface<E> frontVertex = vertexQueue.dequeue();
-                Iterator<VertexInterface<E>> neighbors = frontVertex.getNeighborIterator();
-                while (neighbors.hasNext())
-                {
-                    VertexInterface<E> nextNeighbor = neighbors.next();
-                    if (!nextNeighbor.isVisited())
-                    {
-                        nextNeighbor.visit();
-                        traversalOrder.enqueue(nextNeighbor.getLabel());
-                        vertexQueue.enqueue(nextNeighbor);
-                    } // end if
-                } // end while
-            } // end while
-        return traversalOrder;
+    //     // VertexInterface<E> originVertex = vertices.getValue(origin);
+    //     // originVertex.visit();
+    //     // traversalOrder.enqueue(origin);    // Enqueue vertex label
+    //     // vertexQueue.enqueue(originVertex); // Enqueue vertex
+    //     // while (!vertexQueue.isEmpty())
+    //     //     {
+    //     //         VertexInterface<E> frontVertex = vertexQueue.dequeue();
+    //     //         Iterator<VertexInterface<E>> neighbors = frontVertex.getNeighborIterator();
+    //     //         while (neighbors.hasNext())
+    //     //         {
+    //     //             VertexInterface<E> nextNeighbor = neighbors.next();
+    //     //             if (!nextNeighbor.isVisited())
+    //     //             {
+    //     //                 nextNeighbor.visit();
+    //     //                 traversalOrder.enqueue(nextNeighbor.getLabel());
+    //     //                 vertexQueue.enqueue(nextNeighbor);
+    //     //             } // end if
+    //     //         } // end while
+    //     //     } // end while
+    //     // return traversalOrder;
+    //     //============================================================
+    //     // QueueInterface<E> visited = new LinkedQueue<>();
+    //     // QueueInterface<E> queue = new LinkedQueue<>();
+    //     // E currentvertex = origin;
+    //     // int[] neighbors2;
         
-        // QueueInterface<E> visited = new LinkedQueue<>();
-        // QueueInterface<E> queue = new LinkedQueue<>();
-        // E currentvertex = origin;
-        // int[] neighbors2;
-        
-        // queue.enqueue(currentvertex);
+    //     // queue.enqueue(currentvertex);
 
 
-        // while (!queue.isEmpty())
-        // {
+    //     // while (!queue.isEmpty())
+    //     // {
 
-        //     currentvertex = queue.dequeue();
+    //     //     currentvertex = queue.dequeue();
 
-        //     visited.enqueue(currentvertex);
+    //     //     visited.enqueue(currentvertex);
 
-        //     neighbors2 = neighbors(getindex(currentvertex));
+    //     //     neighbors2 = neighbors(getindex(currentvertex));
     
-        //     for (int i=0; i < neighbors2.length;i++)
-        //     {
-        //         QueueInterface<E> tempvisited = visited;
+    //     //     for (int i=0; i < neighbors2.length;i++)
+    //     //     {
+    //     //         QueueInterface<E> tempvisited = visited;
 
-        //         while (!tempvisited.isEmpty())
-        //         {
-        //             if (neighbors2[i] != getindex(tempvisited.dequeue()))
-        //             {
-        //                 queue.enqueue(getLabel(neighbors2[i]));
-        //             }
-        //         }
-        //     } 
-        // }
-        // return visited;
-    } // end getBreadthFirstTraversal
+    //     //         while (!tempvisited.isEmpty())
+    //     //         {
+    //     //             if (neighbors2[i] != getindex(tempvisited.dequeue()))
+    //     //             {
+    //     //                 queue.enqueue(getLabel(neighbors2[i]));
+    //     //             }
+    //     //         }
+    //     //     } 
+    //     // }
+    //     // return visited;
+    // } // end getBreadthFirstTraversal
 
+    public QueueInterface<E> getBreadthFirstTraversal(E origin) 
+    {
+        Set<E> visited = new HashSet<>(); // Tracks visited vertices
+        
+        QueueInterface<E> traversalOrder = new LinkedQueue<>();
+        QueueInterface<E> vertexQueue = new LinkedQueue<>();
+
+        vertexQueue.enqueue(origin);
+
+        while (!vertexQueue.isEmpty()) 
+        {
+            E currentvertex = vertexQueue.dequeue();
+
+            if (!visited.contains(currentvertex)) 
+            {
+                visited.add(currentvertex); // Mark the vertex as visited
+
+                traversalOrder.enqueue(currentvertex); // Store the visited vertex
+
+                // Assuming getNeighbors(E vertex) returns an array of neighbors for the given vertex
+                int[] neighbors2 = neighbors(getindex(currentvertex)); 
+
+                for (int i : neighbors2) 
+                {
+                    if (!visited.contains(i)) 
+                    {
+                        vertexQueue.enqueue(getLabel(i));
+                    }
+                }
+            }
+    }
+    return traversalOrder;
+}
     public void printgraph() 
     {
         System.out.print("\t");
