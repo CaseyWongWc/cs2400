@@ -1,6 +1,6 @@
 package project9graphs;
 import java.util.HashSet;
-import java.util.Iterator;
+//import java.util.Iterator;
 import java.util.Set;
 
 import project3queue.LinkedQueue;
@@ -11,6 +11,7 @@ public class matrixgraph<E> implements GraphInterface <E>
     private boolean [] [] edges;
     private E[] labels;
     
+    @SuppressWarnings("unchecked")
     public matrixgraph(int n)
     {
         //labels.length = n;
