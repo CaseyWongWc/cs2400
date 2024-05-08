@@ -180,7 +180,6 @@ public class matrixgraph<E> implements GraphInterface <E>
         while (!vertexQueue.isEmpty()) 
         {
             E currentvertex = vertexQueue.dequeue();
-
             if (!visited.contains(currentvertex)) 
             {
                 visited.add(currentvertex); // Mark the vertex as visited
@@ -198,9 +197,15 @@ public class matrixgraph<E> implements GraphInterface <E>
                     }
                 }
             }
+        }
+        System.out.print("BreadthFirstTraversal: ");
+        traversalOrder.printQueue();
+
+        return traversalOrder;
     }
-    return traversalOrder;
-}
+    
+
+
     public void printgraph() 
     {
         System.out.print("\t");

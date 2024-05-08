@@ -99,5 +99,29 @@ public class LinkedQueue<T> implements QueueInterface<T>
         
     }
 
+
+
+
+
+    @Override
+    public void printQueue() 
+    {
+        QueueInterface<T> tempQueue = new LinkedQueue<>();
+
+        // Transfer from original queue to temporary queue to preserve order
+        while (!isEmpty()) 
+        {
+            T item = dequeue();
+            System.out.print(item + " ");
+            tempQueue.enqueue(item);
+        }
+        // Restore the original queue from the temporary queue
+        while (!tempQueue.isEmpty()) 
+        {
+            enqueue(tempQueue.dequeue());
+        }
+        System.out.println();
+    }
+
     
 }
