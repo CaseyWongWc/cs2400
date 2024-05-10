@@ -14,10 +14,10 @@ public class reheapvisiulization {
     // Build a max heap from an array
     private void buildMaxHeap() {
         // Start from the last non-leaf node and heapify each node
-        System.out.print("indexes\t");
+        // System.out.print("indexes\t");
 
-        for (int i = 0; i < size; i++) 
-        {System.out.print( i+1 + "\t");}System.out.println();  //CHANGE
+        // for (int i = 0; i < size; i++) 
+        // {System.out.print( i+1 + "\t");}System.out.println();  //CHANGE
 
         for (int i = (size / 2) - 1; i >= 0; i--) {
             
@@ -54,9 +54,10 @@ public class reheapvisiulization {
             } else {
                 break; // If root is largest, break the loop
             }
-            System.out.print(reheapcounter+1 + ":\t");  //CHANGE
+            System.out.print("ReHeap " +(reheapcounter+1) + ":\t");  //CHANGE
             printHeap();
         }
+        System.out.println();
     }
 
     // Helper method to swap two elements in the heap
@@ -69,7 +70,7 @@ public class reheapvisiulization {
     // Display the heap
     public void printHeap() {
         for (int i = 0; i < size; i++) {
-            System.out.print(heap[i] + "\t");
+            System.out.print(heap[i] + " ");
         }
         System.out.println();
     }
@@ -78,7 +79,7 @@ public class reheapvisiulization {
     public static void main(String args[])
     {
         
-        int[] arr = {27,7,23,22,4,45,21,2,43,17};
+        int[] arr = {27,7,23,22,4,45,21,2,43,17}; //EDIT HERE
 
         
         reheapvisiulization maxHeap = new reheapvisiulization(arr);
