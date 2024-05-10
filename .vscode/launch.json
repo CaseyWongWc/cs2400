@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "reheapvisiulization",
+            "request": "launch",
+            "mainClass": "ATest.reheapvisiulization",
+            "projectName": "cs 2400_97fbe4b6"
+        },
+        {
+            "type": "java",
+            "name": "reheapvisiulization",
+            "request": "launch",
+            "mainClass": "project7Heap.reheapvisiulization",
+            "projectName": "cs 2400_97fbe4b6"
+        },
+        {
+            "type": "java",
             "name": "BFSexample",
             "request": "launch",
             "mainClass": "project9graphs.examples.BFSexample",
