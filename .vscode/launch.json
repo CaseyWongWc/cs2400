@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "BFSexample",
+            "request": "launch",
+            "mainClass": "project9graphs.examples.BFSexample",
+            "projectName": "cs 2400_97fbe4b6"
+        },
+        {
+            "type": "java",
             "name": "adjGraph",
             "request": "launch",
             "mainClass": "project9graphs.adjGraph",

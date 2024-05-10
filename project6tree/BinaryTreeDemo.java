@@ -79,6 +79,7 @@ public class BinaryTreeDemo
   System.out.println();  
  }
  
+
  /* 
  private void preorderTraverse(BinaryNode<String> node)
  {

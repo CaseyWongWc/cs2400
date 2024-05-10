@@ -39,8 +39,8 @@ public class DictionaryDemo
         System.out.println("Final phone book entries: (order based on key)");
         displayOrdered(addressBook);
         // Clear the dictionary
-        addressBook.clear();
-        System.out.println("\nDictionary cleared");
+        // addressBook.clear();
+        // System.out.println("\nDictionary cleared");
         
     }
 
