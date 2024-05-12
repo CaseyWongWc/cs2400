@@ -9,7 +9,7 @@ public class DictionaryDemo
     public static void main(String[] args)
     {
         //DictionaryInterface <String, String> addressBook = new LinkedDictionary<>();
-        HashedDictionary <String, String> addressBook = new HashedDictionary<>(); 
+        HashedDictionary <String, String> addressBook = new HashedDictionary<>(5); 
 
         addressBook.add("555-1264", "150 Main Street");
         addressBook.add("555-8132", "75 Center Court");

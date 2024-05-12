@@ -77,11 +77,11 @@ public class HashedDictionary<K, V> implements DictionaryInterface<K, V>
       {
          if (hashTable[i] != null)
          {
-            System.out.println(i + "\t"+ hashTable[i].toString());
+            System.out.println(i+1 + "\t"+ hashTable[i].toString());
          }
          else
          {
-            System.out.println(i + "\t"+ "null");
+            System.out.println(i+1 + "\t"+ "null");
          }
 
       }

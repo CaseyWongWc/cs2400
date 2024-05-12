@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "BinaryTreeConstruction",
+            "request": "launch",
+            "mainClass": "BinaryTreeConstruction",
+            "projectName": "cs 2400_97fbe4b6"
+        },
+        {
+            "type": "java",
             "name": "reheapvisiulization",
             "request": "launch",
             "mainClass": "ATest.reheapvisiulization",
