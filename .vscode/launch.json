@@ -6,6 +6,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "reheapvisiulization",
+            "request": "launch",
+            "mainClass": "project12end.reheapvisiulization",
+            "projectName": "cs 2400_97fbe4b6"
+        },
+        {
+            "type": "java",
+            "name": "adjGraph",
+            "request": "launch",
+            "mainClass": "project12end.adjGraph",
+            "projectName": "cs 2400_97fbe4b6"
+        },
+        {
+            "type": "java",
+            "name": "BinaryTreeConstruction",
+            "request": "launch",
+            "mainClass": "project12end.BinaryTreeConstruction",
+            "projectName": "cs 2400_97fbe4b6"
+        },
+        {
+            "type": "java",
+            "name": "ai_poi",
+            "request": "launch",
+            "mainClass": "aaa.ai_poi",
+            "projectName": "cs 2400_97fbe4b6"
+        },
+        {
+            "type": "java",
             "name": "BinaryTreeConstruction",
             "request": "launch",
             "mainClass": "BinaryTreeConstruction",

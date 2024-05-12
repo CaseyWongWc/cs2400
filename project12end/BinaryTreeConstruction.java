@@ -1,3 +1,4 @@
+package project12end;
 class TreeNode {
     int value;
     TreeNode left;
@@ -13,6 +14,7 @@ class TreeNode {
 public class BinaryTreeConstruction {
 
     private int preIndex = 0;
+    private int postIndex;
 
     // Construct binary tree from given inorder and preorder traversals
     private TreeNode buildTree(int[] preorder, int[] inorder, int start, int end) {
@@ -29,6 +31,25 @@ public class BinaryTreeConstruction {
         int inIndex = search(inorder, start, end, node.value);
         node.left = buildTree(preorder, inorder, start, inIndex - 1);
         node.right = buildTree(preorder, inorder, inIndex + 1, end);
+
+        return node;
+    }
+
+    // Construct binary tree from given inorder and postorder traversals
+    private TreeNode buildTreeFromPostIn(int[] postorder, int[] inorder, int start, int end) {
+        if (start > end) {
+            return null;
+        }
+
+        TreeNode node = new TreeNode(postorder[postIndex--]);
+
+        if (start == end) {
+            return node;
+        }
+
+        int inIndex = search(inorder, start, end, node.value);
+        node.right = buildTreeFromPostIn(postorder, inorder, inIndex + 1, end);
+        node.left = buildTreeFromPostIn(postorder, inorder, inIndex - 1, start);
 
         return node;
     }
@@ -59,11 +80,34 @@ public class BinaryTreeConstruction {
         printPostOrder(root);
     }
 
-    public static void main(String[] args) {
+    public void generateAndPrintPreOrder(int[] postorder, int[] inorder) {
+        postIndex = postorder.length - 1;
+        TreeNode root = buildTreeFromPostIn(postorder, inorder, 0, inorder.length - 1);
+        printPreOrder(root);
+    }
+
+    // Preorder traversal
+    private void printPreOrder(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        System.out.print(node.value + " ");
+        printPreOrder(node.left);
+        printPreOrder(node.right);
+    }
+
+    public static void main(String[] args) 
+    {
         BinaryTreeConstruction tree = new BinaryTreeConstruction();
-        int[] preorder = {3, 9, 20, 15, 7};
+        
         int[] inorder = {9, 3, 15, 20, 7};
-        System.out.println("The postorder traversal is: ");
-        tree.generateAndPrintPostOrder(preorder, inorder);
+
+        // int[] preorder = {3, 9, 20, 15, 7};
+        // System.out.println("The postorder traversal is: ");
+        // tree.generateAndPrintPostOrder(preorder, inorder);
+
+        int[] postorder = {9, 15, 7, 20, 3};
+        System.out.println("\nThe pre order traversal is: ");
+        tree.generateAndPrintPreOrder(postorder, inorder);
     }
 }

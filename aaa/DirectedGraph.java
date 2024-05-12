@@ -1,3 +1,4 @@
+package aaa;
 public class DirectedGraph {
     private int numVertices; // Number of vertices in the graph
     private int[][] adjacencyMatrix; // Adjacency matrix to store edges
