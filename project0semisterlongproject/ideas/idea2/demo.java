@@ -1,4 +1,4 @@
-package project0semisterlongproject.ideas.idea2;
+dpackage project0semisterlongproject.ideas.idea2;
 
 import java.util.Scanner;
 
